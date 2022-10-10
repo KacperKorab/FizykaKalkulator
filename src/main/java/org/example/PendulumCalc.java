@@ -64,7 +64,9 @@ public class PendulumCalc {
             double minH = allStringLengths.stream().mapToDouble(i -> i).min().orElseThrow(NoSuchElementException::new);
             double deltaH = maxH - minH;
             double uncertainty1 = deltaH / sqrt(3); // niepewność standardowa
+            System.out.println("Niepewność standardowa: " + uncertainty1 + " cm");
             double uncertainty2 = 0.5 * toolPrecision / sqrt(3); // niepewność narzędzia pomiaru
+            System.out.println("Niepewność narzędzia pomiaru: " + uncertainty2 + " cm");
             lengthUncertainty = sqrt(uncertainty1 * uncertainty1 + uncertainty2 * uncertainty2);
             System.out.println("Niepewność pomiaru długości nici 'u(h)': " + String.format("%.4f", lengthUncertainty) + " cm.");
         }
@@ -88,11 +90,10 @@ public class PendulumCalc {
             double maxH = allSphereDiametres.stream().mapToDouble(i -> i).max().orElseThrow(NoSuchElementException::new);
             double minH = allSphereDiametres.stream().mapToDouble(i -> i).min().orElseThrow(NoSuchElementException::new);
             double deltaH = maxH - minH;
-//            System.out.println("deltaH: " + deltaH);
             double uncertainty1 = deltaH * 10 / sqrt(3); // niepewność standardowa
-//            System.out.println("uncertainty1: " + String.format("%.4f", uncertainty1));
+            System.out.println("Niepewność standardowa: " + String.format("%.4f", uncertainty1) + " mm");
             double uncertainty2 = toolPrecision / sqrt(3); // niepewność narzędzia pomiaru
-//            System.out.println("uncertainty2: " + String.format("%.4f", uncertainty2));
+            System.out.println("Niepewność narzędzia pomiaru: " + String.format("%.4f", uncertainty2) + " mm");
             diameterUncertainty = sqrt((uncertainty1 * uncertainty1) + (uncertainty2 * uncertainty2));
             System.out.println("Niepewność pomiaru średnicy kulki 'u(d)': " + String.format("%.4f", diameterUncertainty) + " mm.");
         }
