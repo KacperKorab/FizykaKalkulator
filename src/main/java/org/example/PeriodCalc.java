@@ -21,11 +21,11 @@ public class PeriodCalc {
             for (double measurement : allPeriods){
                 sumList.add((measurement-averagePeriod)*(measurement-averagePeriod));
             }
-            double uncertain_ST0 = Math.sqrt(
+            double standardDeviation = Math.sqrt(
                     sumList.stream().mapToDouble(i -> i).sum()/(sumList.size()-1));
 //            System.out.println("ST0: " + String.format("%.6f", uncertain_ST0) + " s.");
-            double uT0 = uncertain_ST0/Math.sqrt(sumList.size());
-            System.out.println("Niepewność pomiarowa typu a 'u(t)': " + String.format("%.6f", uT0) + " s.");
+            double periodUncertainty = standardDeviation/Math.sqrt(sumList.size());
+            System.out.println("Niepewność pomiarowa typu a 'u(t)': " + String.format("%.6f", periodUncertainty) + " s.");
         }
     }
 }

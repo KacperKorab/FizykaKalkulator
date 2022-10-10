@@ -10,7 +10,7 @@ import static java.lang.Math.sqrt;
 public class LengthCalc {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj dokładność narzędzia pomiaru w cm:");
+        System.out.println("Podaj dokładność narzędzia pomiaru długości nici w cm:");
         double toolPrecision = scanner.nextDouble();
         List<Double> allLengths = new ArrayList<>();
         System.out.println("Wpisz '0' aby wyjść.");

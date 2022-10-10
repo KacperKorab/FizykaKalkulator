@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2007154-3fa9-476a-9787-060d03f8fad9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/AccelCalc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/LengthCalc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/PeriodCalc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/TotalLengthCalc.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/diamCalc.java" afterDir="false" />
+    <list default="true" id="e2007154-3fa9-476a-9787-060d03f8fad9" name="Changes" comment="maybe working">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/PendulumCalc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/LengthCalc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/LengthCalc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PeriodCalc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PeriodCalc.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +52,7 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.AccelCalc">
+  <component name="RunManager" selected="Application.PendulumCalc">
     <configuration name="AccelCalc" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.AccelCalc" />
       <module name="Kalkulator_do_Fizyki" />
@@ -74,6 +68,19 @@
     </configuration>
     <configuration name="LengthCalc" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.LengthCalc" />
+      <module name="Kalkulator_do_Fizyki" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PendulumCalc" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.PendulumCalc" />
       <module name="Kalkulator_do_Fizyki" />
       <extension name="coverage">
         <pattern>
@@ -111,26 +118,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="lengthCalc" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.lengthCalc" />
-      <module name="Kalkulator_do_Fizyki" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PendulumCalc" />
         <item itemvalue="Application.AccelCalc" />
         <item itemvalue="Application.PeriodCalc" />
         <item itemvalue="Application.TotalLengthCalc" />
         <item itemvalue="Application.LengthCalc" />
-        <item itemvalue="Application.lengthCalc" />
       </list>
     </recent_temporary>
   </component>
@@ -142,8 +136,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1665403619327</updated>
-      <workItem from="1665403623369" duration="11564000" />
+      <workItem from="1665403623369" duration="16736000" />
     </task>
+    <task id="LOCAL-00001" summary="maybe working">
+      <created>1665420196263</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1665420196263</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,5 +161,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="maybe working" />
+    <option name="LAST_COMMIT_MESSAGE" value="maybe working" />
   </component>
 </project>
