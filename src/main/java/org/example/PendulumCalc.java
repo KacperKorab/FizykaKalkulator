@@ -120,7 +120,7 @@ public class PendulumCalc {
                 (totalLengthUncertainty / totalLength) * (totalLengthUncertainty / totalLength) +
                         (2 * uT_periodUncertainty / T_period) * (2 * uT_periodUncertainty / T_period));
         System.out.println("Niepewność przyspieszenia wynosi: " +
-                String.format("%.2f", accelUncertainty) + " m/s^2");
+                String.format("%.4f", accelUncertainty) + " m/s^2");
 
     }
 }
