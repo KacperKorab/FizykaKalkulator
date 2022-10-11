@@ -10,24 +10,23 @@ public class PendulumCalcV2 {
     // Wprowadź dane eksperymentu do poniższych zmiennych:
     // Pomiary czasu trwania okresów wahadła (s).
     private static final List<Double> periodMeasurements = new ArrayList<>(
-            List.of(17.45, 17.62, 17.72, 17.38, 17.63, 17.40,
-                    17.34, 17.10, 17.46, 17.66, 17.56, 17.66, 17.97));
+            List.of(16.08, 16.16, 16.13, 16.09, 16.07, 15.83, 16.08, 16.16, 16.05, 16.31));
     private static final double periodMeasurementError = 0.01;
     private static final double periodAmount = 10;
 
     // Pomiary długości nitki (cm).
     private static final List<Double> stringMeasurements = new ArrayList<>(
-            List.of(75.5, 75.5, 75.6, 75.2));
+            List.of(63.0, 64.0, 63.7));
     private static final double stringMeasurementError = 0.1;
 
     // Pomiary średnicy kulki (mm).
     private static final List<Double> ballMeasurements = new ArrayList<>(
-            List.of(19.67, 19.70, 19.69));
+            List.of(19.0, 19.0, 19.03));
     private static final double ballMeasurementError = 0.03;
 
     // Niżej nic nie zmieniać!
     public static void main(String[] args) {
-        Acceleration(Period(),Length(String(), Ball()));
+        Acceleration(Period(), Length(String(), Ball()));
     }
 
     // Czas okresu wahadła.
@@ -69,6 +68,7 @@ public class PendulumCalcV2 {
         double pendulumPeriodUncertainty = periodUncertaintyTotal / periodAmount;
         System.out.printf("\n\nCzas jednego okresu oraz jego niepewność:\n" +
                 "%.4f(%.4f) s\n", pendulumPeriod, pendulumPeriodUncertainty);
+        System.out.println("\n****************************************************************");
 
         return new double[]{pendulumPeriod, pendulumPeriodUncertainty};
     }
@@ -102,6 +102,7 @@ public class PendulumCalcV2 {
                 "%.4f cm", stringUncertaintyTotal);
         System.out.printf("\n\nOstateczny wynik pomiaru długości wahadła przyjmuje postać:\n" +
                 "%.4f(%.4f) cm\n", stringArithmeticAverage, stringUncertaintyTotal);
+        System.out.println("\n****************************************************************");
 
         return new double[]{stringArithmeticAverage, stringUncertaintyTotal};
 
@@ -136,6 +137,7 @@ public class PendulumCalcV2 {
                 "%.4f mm", ballUncertaintyTotal);
         System.out.printf("\n\nOstateczny wynik pomiaru średnicy kulki przyjmuje postać:\n" +
                 "%.4f(%.4f) mm\n", ballArithmeticAverage, ballUncertaintyTotal);
+        System.out.println("\n****************************************************************");
 
         return new double[]{ballArithmeticAverage, ballUncertaintyTotal};
     }
@@ -151,6 +153,7 @@ public class PendulumCalcV2 {
                 "%.4f", length);
         System.out.printf("\n\nOstatecznie wynik pomiaru długości wahadła przyjmuje postać:\n" +
                 "%.4f(%.4f) cm\n", length, lengthUncertainty);
+        System.out.println("\n****************************************************************");
 
         return new double[]{length, lengthUncertainty};
     }
@@ -163,7 +166,7 @@ public class PendulumCalcV2 {
                 "%.4f m/s^2", acceleration);
         double accelerationUncertainty = acceleration * sqrt(
                 ((lengthResults[1] / lengthResults[0]) * (lengthResults[1] / lengthResults[0])) +
-                ((2 * periodResults[1] / periodResults[0]) * (2 * periodResults[1] / periodResults[0])));
+                        ((2 * periodResults[1] / periodResults[0]) * (2 * periodResults[1] / periodResults[0])));
         System.out.printf("\nNiepewność przyspieszenia grawitacyjnego wynosi:\n" +
                 "%.4f m/s^2", accelerationUncertainty);
         System.out.printf("\n\nOstateczny wynik pomiaru wartości przyśpieszenia ziemskiego przyjmuje postać:\n" +
