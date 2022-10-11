@@ -175,3 +175,4 @@ public class PendulumCalcV2 {
         return new double[]{acceleration, accelerationUncertainty};
     }
 }
+// Kacper Korab
