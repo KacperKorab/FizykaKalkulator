@@ -123,7 +123,7 @@ public class PendulumCalcV2 {
         System.out.printf("\nRóżnica między największym i najmniejszym pomiarem wynosi:\n" +
                 "%.4f mm", deltaD);
 
-        double ballUncertaintyB1 = deltaD / sqrt(3);
+        double ballUncertaintyB1 = 10 * deltaD / sqrt(3);
         System.out.printf("\nNiepewność standardowa pomiarów średnicy kulki wynosi:\n" +
                 "%.4f mm", ballUncertaintyB1);
 
@@ -148,9 +148,9 @@ public class PendulumCalcV2 {
         System.out.printf("\nDługość całkowita wynosi:\n" +
                 "%.4f", length);
         double lengthUncertainty = sqrt((stringResults[1] * stringResults[1]) +
-                ((0.5 * ballResults[1] / 10) * (0.5 * ballResults[1]) / 10));
+                ((0.05 * ballResults[1]) * (0.05 * ballResults[1])));
         System.out.printf("\nNiepewność długości całkowitej wynosi:\n" +
-                "%.4f", length);
+                "%.4f", lengthUncertainty);
         System.out.printf("\n\nOstatecznie wynik pomiaru długości wahadła przyjmuje postać:\n" +
                 "%.4f(%.4f) cm\n", length, lengthUncertainty);
         System.out.println("\n****************************************************************");

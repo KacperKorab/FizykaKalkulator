@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2007154-3fa9-476a-9787-060d03f8fad9" name="Changes" comment="changed default input data">
+    <list default="true" id="e2007154-3fa9-476a-9787-060d03f8fad9" name="Changes" comment="signature">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PendulumCalcV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PendulumCalcV2.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1665403619327</updated>
       <workItem from="1665403623369" duration="23532000" />
-      <workItem from="1665496338625" duration="10426000" />
+      <workItem from="1665496338625" duration="11877000" />
     </task>
     <task id="LOCAL-00001" summary="maybe working">
       <created>1665420196263</created>
@@ -192,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665506704515</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="signature">
+      <created>1665507930374</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665507930374</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,6 +225,7 @@
     <MESSAGE value="added more info" />
     <MESSAGE value="added version 2" />
     <MESSAGE value="changed default input data" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed default input data" />
+    <MESSAGE value="signature" />
+    <option name="LAST_COMMIT_MESSAGE" value="signature" />
   </component>
 </project>
