@@ -3,7 +3,8 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.example.Formulas.LineCoefficient;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 public class YoungCalcB {
 
@@ -33,10 +34,15 @@ public class YoungCalcB {
         double rodWidth = Formulas.ArithmeticAverage(measurementsD, "Szerokość pręta D [mm]");
         double rodLength = Formulas.ArithmeticAverage(measurementsL, "Długość pręta L [cm]");
         double tipLength = Formulas.ArithmeticAverage(measurementsS, "Długość wskazówki S [cm]");
-        double lineCoefficientB = LineCoefficient(measurementsY, measurementsM, "Ugięcie pręta Y [mm]"); //mm
+        double lineCoefficientB = 32.99;
+
+        double youngModel = YoungModelB(rodThickness, rodWidth, rodLength, tipLength, lineCoefficientB);
+        double youngModelUncertainty = YoungModelUncertaintyB(measurementsH, measurementsD, measurementsL, lineCoefficientB, 0.47, youngModel);
 
         System.out.println("Moduł Younga dla eksperymentu B wynosi: " +
-                YoungModelB(rodThickness, rodWidth, rodLength, tipLength, lineCoefficientB));
+                youngModel);
+        System.out.println("Niepewność modułu Younga dla eksperymentu B wynosi: " +
+                youngModelUncertainty);
     }
 
     private static double YoungModelB(double rodThickness, double rodWidth, double rodLength, double tipLength, double lineCoefficient) {
@@ -48,7 +54,22 @@ public class YoungCalcB {
                 %.4f - Długość wskazówki S [cm]
                 %.4f - Współczynnik regresji linowej a [cm]
                 """, rodThickness, rodWidth, rodLength, tipLength, lineCoefficient);
-        return (2 * rodLength * rodLength * ((2 * rodLength ) + (3 * tipLength)) /
+        return (2 * rodLength * rodLength * ((2 * rodLength) + (3 * tipLength)) /
                 (lineCoefficient * rodWidth * rodThickness * rodThickness * rodThickness));
+    }
+
+    private static double YoungModelUncertaintyB(List<Double> rodHeightMeasurements, List<Double> rodDiameterMeasurements,
+                                                 List<Double> rodLengthMeasurements, double coefficient, double coefficientUncertainty, double youngModel) {
+        System.out.println("Niepewności pomiaru grubości, szerokości i długości pręta oraz długości jego wskazówki.");
+        double D = Formulas.ArithmeticAverage(rodDiameterMeasurements, "Szerokość pręta D [mm]");
+        double L = Formulas.ArithmeticAverage(rodLengthMeasurements, "Długość pręta L [cm]");
+        double H = Formulas.ArithmeticAverage(rodHeightMeasurements, "Grubość pręta H [mm]");
+        double a = coefficient;
+
+        double ucD = Formulas.UncertaintyCalc(rodDiameterMeasurements, 0.03, "Szerokość pręta D [mm]");
+        double ucL = Formulas.UncertaintyCalc(rodLengthMeasurements, 0.01, "Długość pręta L [cm]");
+        double ucH = Formulas.UncertaintyCalc(rodHeightMeasurements, 0.03, "Grubość pręta H [mm]");
+        double ua = coefficientUncertainty;
+        return youngModel * sqrt(pow(-1 * ucD / D, 2) + pow(3 * ucL / L, 2) + pow(-3 * ucH / H, 2) + pow(-1 * ua / a, 2));
     }
 }
