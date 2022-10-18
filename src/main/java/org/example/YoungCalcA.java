@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.sqrt;
-import static org.example.Formulas.LineCoefficient;
 
 public class YoungCalcA {
     // Wydłużenie drutu (mm)
@@ -45,12 +44,52 @@ public class YoungCalcA {
                                                  List<Double> wireDiameterMeasurements, double diameterMeasurementError,
                                                  double lineCoefficient, double ua_coefficientUncertainty, double youngModel) {
         System.out.println("Niepewności pomiaru długości, średnicy i wydłużenia drutu.");
-        double wireDiameter = Formulas.ArithmeticAverage(wireDiameterMeasurements, "Średnica drutu.");
+        double wireDiameter = ArithmeticAverage(wireDiameterMeasurements, "Średnica drutu.");
         double ucl0_lengthUncertainty = lengthMeasurementError;
-        double ucD_diameterUncertainty = Formulas.UncertaintyCalc(wireDiameterMeasurements, diameterMeasurementError, "Średnica drutu");
+        double ucD_diameterUncertainty = UncertaintyCalc(wireDiameterMeasurements, diameterMeasurementError, "Średnica drutu");
         return youngModel * sqrt(
                         Math.pow(ucl0_lengthUncertainty / length, 2) +
                         Math.pow(-2 * ucD_diameterUncertainty / wireDiameter, 2) +
                         Math.pow(-1 * ua_coefficientUncertainty / lineCoefficient, 2));
+    }
+    private static double ArithmeticAverage(List<Double> measurements, String measurementsName) {
+        double arithmeticAverage = measurements.stream().mapToDouble(i -> i).sum() / measurements.size();
+        System.out.printf("""
+                Wprowadzono dane: %s
+                %s
+                Średnia arytmetyczna wprowadzonych danych wynosi:
+                %.4f
+                """,measurementsName, measurements, arithmeticAverage);
+        return arithmeticAverage;
+    }
+
+    private static double UncertaintyCalc(List<Double> measurements, double measurementError, String measurementsName) {
+        System.out.println("\nNiepewność");
+        double arithmeticAverage = ArithmeticAverage(measurements, measurementsName);
+
+        // Estymator odchylenia standardowego
+        List<Double> sumList = new ArrayList<>();
+        // dla każdego pomiaru: pomiar minus średnia do kwadratu
+        for (double measurement : measurements) {
+            sumList.add((measurement - arithmeticAverage) * (measurement - arithmeticAverage));
+        }
+        // Niepewność A
+        // pierwiastek sumy elementów wyżej, podzielonej przez ich ilość razy ilość minus jeden
+        double UncertaintyA = sqrt(
+                sumList.stream().mapToDouble(i -> i).sum() / sumList.size() * (sumList.size() - 1));
+        System.out.printf("\nNiepewność pomiaru związana ze statystycznym rozrzutem wyników (ua):\n" +
+                "%.4f", UncertaintyA);
+
+        // Niepewność B
+        double UncertaintyB = (0.5 * measurementError) / sqrt(3);
+        System.out.printf("\nNiepewność pomiaru związana ze błędem prostego przyrządu mechanicznego (ub):\n" +
+                "%.4f", UncertaintyB);
+
+        double uncertaintyTotal = sqrt((UncertaintyA * UncertaintyA) +
+                (UncertaintyB * UncertaintyB));
+        System.out.printf("\nCałkowita niepewność pomiaru:\n" +
+                "%.4f\n", uncertaintyTotal);
+        System.out.println("********************************");
+        return uncertaintyTotal;
     }
 }

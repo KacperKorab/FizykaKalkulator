@@ -30,10 +30,10 @@ public class YoungCalcB {
     public static void main(String[] args) {
 
 
-        double rodThickness = Formulas.ArithmeticAverage(measurementsH, "Grubość pręta H [mm]");
-        double rodWidth = Formulas.ArithmeticAverage(measurementsD, "Szerokość pręta D [mm]");
-        double rodLength = Formulas.ArithmeticAverage(measurementsL, "Długość pręta L [cm]");
-        double tipLength = Formulas.ArithmeticAverage(measurementsS, "Długość wskazówki S [cm]");
+        double rodThickness = ArithmeticAverage(measurementsH, "Grubość pręta H [mm]");
+        double rodWidth = ArithmeticAverage(measurementsD, "Szerokość pręta D [mm]");
+        double rodLength = ArithmeticAverage(measurementsL, "Długość pręta L [cm]");
+        double tipLength = ArithmeticAverage(measurementsS, "Długość wskazówki S [cm]");
         double lineCoefficientB = 32.99;
 
         double youngModel = YoungModelB(rodThickness, rodWidth, rodLength, tipLength, lineCoefficientB);
@@ -61,15 +61,56 @@ public class YoungCalcB {
     private static double YoungModelUncertaintyB(List<Double> rodHeightMeasurements, List<Double> rodDiameterMeasurements,
                                                  List<Double> rodLengthMeasurements, double coefficient, double coefficientUncertainty, double youngModel) {
         System.out.println("Niepewności pomiaru grubości, szerokości i długości pręta oraz długości jego wskazówki.");
-        double D = Formulas.ArithmeticAverage(rodDiameterMeasurements, "Szerokość pręta D [mm]");
-        double L = Formulas.ArithmeticAverage(rodLengthMeasurements, "Długość pręta L [cm]");
-        double H = Formulas.ArithmeticAverage(rodHeightMeasurements, "Grubość pręta H [mm]");
+        double D = ArithmeticAverage(rodDiameterMeasurements, "Szerokość pręta D [mm]");
+        double L = ArithmeticAverage(rodLengthMeasurements, "Długość pręta L [cm]");
+        double H = ArithmeticAverage(rodHeightMeasurements, "Grubość pręta H [mm]");
         double a = coefficient;
 
-        double ucD = Formulas.UncertaintyCalc(rodDiameterMeasurements, 0.03, "Szerokość pręta D [mm]");
-        double ucL = Formulas.UncertaintyCalc(rodLengthMeasurements, 0.01, "Długość pręta L [cm]");
-        double ucH = Formulas.UncertaintyCalc(rodHeightMeasurements, 0.03, "Grubość pręta H [mm]");
+        double ucD = UncertaintyCalc(rodDiameterMeasurements, 0.03, "Szerokość pręta D [mm]");
+        double ucL = UncertaintyCalc(rodLengthMeasurements, 0.01, "Długość pręta L [cm]");
+        double ucH = UncertaintyCalc(rodHeightMeasurements, 0.03, "Grubość pręta H [mm]");
         double ua = coefficientUncertainty;
         return youngModel * sqrt(pow(-1 * ucD / D, 2) + pow(3 * ucL / L, 2) + pow(-3 * ucH / H, 2) + pow(-1 * ua / a, 2));
+    }
+
+    private static double ArithmeticAverage(List<Double> measurements, String measurementsName) {
+        double arithmeticAverage = measurements.stream().mapToDouble(i -> i).sum() / measurements.size();
+        System.out.printf("""
+                Wprowadzono dane: %s
+                %s
+                Średnia arytmetyczna wprowadzonych danych wynosi:
+                %.4f
+                """,measurementsName, measurements, arithmeticAverage);
+        return arithmeticAverage;
+    }
+
+    private static double UncertaintyCalc(List<Double> measurements, double measurementError, String measurementsName) {
+        System.out.println("\nNiepewność");
+        double arithmeticAverage = ArithmeticAverage(measurements, measurementsName);
+
+        // Estymator odchylenia standardowego
+        List<Double> sumList = new ArrayList<>();
+        // dla każdego pomiaru: pomiar minus średnia do kwadratu
+        for (double measurement : measurements) {
+            sumList.add((measurement - arithmeticAverage) * (measurement - arithmeticAverage));
+        }
+        // Niepewność A
+        // pierwiastek sumy elementów wyżej, podzielonej przez ich ilość razy ilość minus jeden
+        double UncertaintyA = sqrt(
+                sumList.stream().mapToDouble(i -> i).sum() / sumList.size() * (sumList.size() - 1));
+        System.out.printf("\nNiepewność pomiaru związana ze statystycznym rozrzutem wyników (ua):\n" +
+                "%.4f", UncertaintyA);
+
+        // Niepewność B
+        double UncertaintyB = (0.5 * measurementError) / sqrt(3);
+        System.out.printf("\nNiepewność pomiaru związana ze błędem prostego przyrządu mechanicznego (ub):\n" +
+                "%.4f", UncertaintyB);
+
+        double uncertaintyTotal = sqrt((UncertaintyA * UncertaintyA) +
+                (UncertaintyB * UncertaintyB));
+        System.out.printf("\nCałkowita niepewność pomiaru:\n" +
+                "%.4f\n", uncertaintyTotal);
+        System.out.println("********************************");
+        return uncertaintyTotal;
     }
 }
